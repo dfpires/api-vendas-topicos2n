@@ -8,7 +8,7 @@ import cors from 'cors'
 const servidor = express()
 
 // servidor vai utilizar o cors
-servidor.use(cors)
+servidor.use(cors())
 
 // servidor vai converte valores do usuário para jSON
 servidor.use(express.json())
