@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-    "passoword": "docker",
+    "password": "docker",
     "database": "api-vendas-topicos2n",
     "migrations": [
         "./src/shared/typeorm/migrations/*.ts"
