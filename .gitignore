@@ -6,6 +6,5 @@ temp/
 .env
 coverage
 dist
-
 uploads/*
 !uploads/.gitkeep
