@@ -1,5 +1,4 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
-import { isPromise } from "util/types";
 
 export class CreateUsers1636205839984 implements MigrationInterface {
 
@@ -14,7 +13,36 @@ export class CreateUsers1636205839984 implements MigrationInterface {
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
+                    },
+                    {
+                        name: 'name',
+                        type: 'varchar'
+                    },
+                    {
+                        name: 'email',
+                        type: 'varchar',
+                        isUnique: true
+                    },
+                    {
+                        name: 'password',
+                        type: 'varchar'
+                    },
+                    {
+                        name: 'avatar',
+                        type: 'varchar',
+                        isNullable: true
+                    },
+                    {
+                        name: 'created_at',
+                        type: 'timestamp',
+                        default: 'now()'
+                    },
+                    {
+                        name: 'updated_at',
+                        type: 'timestamp',
+                        default: 'now()'
                     }
+
                 ]
             })
         )
