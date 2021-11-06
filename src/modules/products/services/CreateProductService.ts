@@ -1,4 +1,5 @@
 import { getCustomRepository } from "typeorm";
+import AppError from "../../../shared/errors/AppError";
 import Product from "../typeorm/entities/Product";
 import ProductRepository from "../typeorm/repositories/ProductRepository";
 
@@ -15,8 +16,17 @@ class CreateProductService {
         const productRepository = getCustomRepository(ProductRepository)
         const productExists = await productRepository.findByName(name)
         if (productExists){
-            c
-            throw 
+            throw new AppError(`Já existe um produto com este nome cadastrado`, 400)
         }
+        // podemos salvar no banco
+        // cria produto
+        const product = productRepository.create({
+            name, quantity, price
+        })
+
+        // vamos salvar no banco
+        await productRepository.save(product)
+        
+        return product
     }
 }
