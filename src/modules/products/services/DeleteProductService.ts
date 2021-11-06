@@ -4,7 +4,7 @@ import ProductRepository from "../typeorm/repositories/ProductRepository";
 
 class DeleteProductService {
 
-    public async execute(id: number): Promise<void> {
+    public async execute(id: string): Promise<void> {
 
         // não podemos remover um produto que não exista
         const productRepository = getCustomRepository(ProductRepository)
