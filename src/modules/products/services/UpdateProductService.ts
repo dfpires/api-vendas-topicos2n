@@ -33,3 +33,5 @@ class UpdateProductService {
         return productExist
     }
 }
+
+export default UpdateProductService
