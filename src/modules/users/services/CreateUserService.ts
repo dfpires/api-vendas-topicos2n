@@ -35,3 +35,5 @@ class CreateUserService {
         return novoUsuario
     }
 }
+
+export default CreateUserService
