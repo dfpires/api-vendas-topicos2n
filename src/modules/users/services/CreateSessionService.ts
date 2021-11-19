@@ -4,6 +4,8 @@ import User from "../typeorm/entities/User";
 import UserRepository from "../typeorm/repository/UserRepository";
 import {compare} from 'bcryptjs'
 
+import {sign} from 'jsonwebtoken'
+
 interface IRequest { // tipo de dados para requisição
     email: string;
     password: string;
@@ -20,15 +22,26 @@ class CreateSessionService {
         // verifica se o usuário existe
         const user = await userRepository.findByEmail(email)
         if (!user){
-            throw new AppError(`Usuário/senha inválidos`, 400)
+            throw new AppError(`Usuário/senha inválidos`, 401)
         }
         // usuário existe
         // senha está correta ? bcryptjs
         const senhaConfirmada = await compare(password, user.password)
         if (!senhaConfirmada){
-            throw new AppError(`Usuário/senha inválidos`, 400)
+            throw new AppError(`Usuário/senha inválidos`, 401)
         }
         // senha correta
-        
+        // gerar o token para usuário
+        const token = sign({}, 'jfalkjfklajdsklfjdsklafjasdklfj;kls', {
+            subject: user.id,
+            expiresIn: '1d'
+        })
+
+        return {
+            user,
+            token
+        }
     }
 }
+
+export default CreateSessionService
