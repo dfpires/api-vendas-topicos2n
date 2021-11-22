@@ -15,3 +15,5 @@ class SessionController {
         return response.json(user)
     }
 }
+
+export default SessionController
