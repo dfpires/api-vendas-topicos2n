@@ -1,15 +1,15 @@
 import React from 'react';
-import { Dashboard } from './pages/Dashboard';
-import { Repository } from './pages/Repository';
-
+import {BrowserRouter} from 'react-router-dom'
+import {Routes} from './routes/index'
 
 // criando um componente funcional - FC
 const App: React.FC = () => {
 
   return (
    <>
-      <Dashboard/>
-      <Repository/>      
+    <BrowserRouter>
+      <Routes/>
+    </BrowserRouter>        
     </>
     
   );
