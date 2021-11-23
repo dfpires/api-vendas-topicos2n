@@ -11,7 +11,7 @@ export default function isAuthenticated(request: Request, response: Response, ne
     }
     // frontend informou o token
     // Beared jkasjdkfjdsklfjkalsdjfkljasdklfjadskljfals
-    let [beared, token] = authHeaders.split(' ')
+    let [, token] = authHeaders.split(' ')
     // verifica se o token é válido
     try {
         // devemos utilizar a chave secreta é privada
