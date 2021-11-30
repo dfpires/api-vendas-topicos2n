@@ -3,6 +3,6 @@ import React from 'react'
 export const Dashboard: React.FC = () => {
 
     return (
-        <h1> Página de Dashboard </h1>
+        <Title> Catálogo de repositórios do Github </Title>
     )
 }
