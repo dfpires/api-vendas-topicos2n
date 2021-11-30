@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter} from 'react-router-dom'
 import {Routes} from './routes/index'
 import {Header} from './pages/Header/index'
+import { GlobalStyle } from './styles/global';
 
 // criando um componente funcional - FC
 const App: React.FC = () => {
@@ -11,7 +12,8 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Header/>
       <Routes/>
-    </BrowserRouter>        
+    </BrowserRouter>   
+    <GlobalStyle/>     
     </>
     
   );
