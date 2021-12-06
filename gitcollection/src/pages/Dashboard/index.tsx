@@ -19,6 +19,9 @@ export const Dashboard: React.FC = () => {
     // criando um estado de variável e inicializo com vazio
     const [novoRepositorio, setNovoRepositorio] = React.useState('')
 
+    // estado da variável repositorio que inicia como vazio do tipo githubrepository
+    const [repositorio, setRepositorio] = React.useState({} as IGithubRepository)
+
     // altera o estado da variável novoRepositório com o valor na caixa de texto
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void{
         // alterar o valor de novoRepositorio com o valor digitado pelo usuário
@@ -27,14 +30,17 @@ export const Dashboard: React.FC = () => {
     }
     // chamar a api do github -> assíncrona
     async function handleAddRepo(event: React.FormEvent<HTMLFormElement>, ): Promise<void>{
-
+        
+        // não atualiza a página
+        event.preventDefault(); 
+        
         // vamos chamar a api -> dependência axios
         // novoRepositorio é a informação do usuário
         // tratar o erro
         try {
-            const resposta = await api.get(`repos/${novoRepositorio}`)
-            const repositorio = resposta.data // dados vindos do servidor
-            console.log(repositorio)
+            const resposta = await api.get<IGithubRepository>(`repos/${novoRepositorio}`)
+            const aux = resposta.data // dados vindos do servidor
+            setRepositorio(aux) // atualiza o repositorio com os dados do servidor
         }
         catch {
             console.log(`Repositório não encontrado`)
