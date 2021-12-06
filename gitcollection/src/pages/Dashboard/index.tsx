@@ -3,6 +3,7 @@ import { Formulario, Title } from './styles'
 
 import logo from '../../assets/logo.svg'
 import { api } from '../../services/api'
+import { Link } from 'react-router-dom'
 
 export const Dashboard: React.FC = () => {
 
@@ -55,6 +56,17 @@ export const Dashboard: React.FC = () => {
                 <input placeholder="username/nome_repositorio" onChange={handleInputChange}/>
                 <button type="submit"> Buscar </button>
             </Formulario>
+            <div>
+                <Link 
+                    to={`/repositories/${repositorio.full_name}`}>
+                    <img src={repositorio.owner.avatar_url}
+                        alt={repositorio.owner.login}/>
+                    <div>
+                        <strong> {repositorio.full_name} </strong>
+                        <p> {repositorio.description}</p>
+                    </div>
+                </Link>
+            </div>
         </>
     )
 }
