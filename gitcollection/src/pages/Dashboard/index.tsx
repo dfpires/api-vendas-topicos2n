@@ -1,5 +1,5 @@
 import React from 'react'
-import { Formulario, Title } from './styles'
+import { Formulario, Repo, Title } from './styles'
 
 import logo from '../../assets/logo.svg'
 import { api } from '../../services/api'
@@ -21,7 +21,7 @@ export const Dashboard: React.FC = () => {
     const [novoRepositorio, setNovoRepositorio] = React.useState('')
 
     // estado da variável repositorio que inicia como vazio do tipo githubrepository
-    const [repositorio, setRepositorio] = React.useState({} as IGithubRepository)
+    const [repositorio, setRepositorio] = React.useState({owner: {}} as IGithubRepository)
 
     // altera o estado da variável novoRepositório com o valor na caixa de texto
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void{
@@ -56,7 +56,8 @@ export const Dashboard: React.FC = () => {
                 <input placeholder="username/nome_repositorio" onChange={handleInputChange}/>
                 <button type="submit"> Buscar </button>
             </Formulario>
-            <div>
+
+            <Repo>
                 <Link 
                     to={`/repositories/${repositorio.full_name}`}>
                     <img src={repositorio.owner.avatar_url}
@@ -66,7 +67,7 @@ export const Dashboard: React.FC = () => {
                         <p> {repositorio.description}</p>
                     </div>
                 </Link>
-            </div>
+            </Repo>
         </>
     )
 }
