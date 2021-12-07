@@ -21,7 +21,8 @@ export const Dashboard: React.FC = () => {
     const [novoRepositorio, setNovoRepositorio] = React.useState('')
 
     // estado da variável repositorio que inicia como vazio do tipo githubrepository
-    const [repositorio, setRepositorio] = React.useState({owner: {}} as IGithubRepository)
+    // repositório é um vetor
+    const [repositorio, setRepositorio] = React.useState<IGithubRepository[]>([])
 
     // altera o estado da variável novoRepositório com o valor na caixa de texto
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void{
@@ -41,7 +42,8 @@ export const Dashboard: React.FC = () => {
         try {
             const resposta = await api.get<IGithubRepository>(`repos/${novoRepositorio}`)
             const aux = resposta.data // dados vindos do servidor
-            setRepositorio(aux) // atualiza o repositorio com os dados do servidor
+            // adiciona aux no vetor repositório
+            setRepositorio([...repositorio, aux]) // atualiza o repositorio com os dados do servidor
         }
         catch {
             console.log(`Repositório não encontrado`)
@@ -58,15 +60,19 @@ export const Dashboard: React.FC = () => {
             </Formulario>
 
             <Repo>
-                <Link 
-                    to={`/repositories/${repositorio.full_name}`}>
-                    <img src={repositorio.owner.avatar_url}
-                        alt={repositorio.owner.login}/>
-                    <div>
-                        <strong> {repositorio.full_name} </strong>
-                        <p> {repositorio.description}</p>
-                    </div>
-                </Link>
+                {   // percorre o vetor
+                    repositorio.map((item, indice) => (
+                        <Link 
+                            to={`/repositories/${item.full_name}`}>
+                            <img src={item.owner.avatar_url}
+                                alt={item.owner.login}/>
+                            <div>
+                                <strong> {item.full_name} </strong>
+                                <p> {item.description}</p>
+                            </div>
+                        </Link>
+                    ))
+                }
             </Repo>
         </>
     )

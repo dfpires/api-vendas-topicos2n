@@ -43,6 +43,7 @@ export const Repo = styled.div`
         display: flex;
         align-items: center;
         text-decoration: none;
+        margin-top: 16px;
         img {
             width: 64px;
             height: 64px;
